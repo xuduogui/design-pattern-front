@@ -1,0 +1,123 @@
+<!--
+ * @Author: xuziyong
+ * @Date: 2021-06-18 01:07:34
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-06-18 03:02:00
+ * @Description: TODO
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Singleton</title>
+  <style>
+    body {
+      padding: 20px 50px;
+    }
+
+    .xzy-link-to {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>单例模式(Singleton)</h1>
+
+  <h2>百度百科</h2>
+  <p>
+    <q>
+      单例模式，属于创建类型的一种常用的软件设计模式。通过单例模式的方法创建的类在当前进程中只有一个实例（根据需要，也有可能一个线程中属于单例，如：仅线程上下文内使用同一个实例）
+    </q>
+    <br />
+    <a class="xzy-link-to" href="https://baike.baidu.com/item/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">原文链接</a>
+  </p>
+
+  <h2>应用场景</h2>
+  <ul>
+    <li>播放器</li>
+    <li>系统弹出层</li>
+    <li>...</li>
+  </ul>
+
+  <h2>概念级实践</h2>
+  <div id="conceptionDemo">
+    <p id="isSingletonParagraph"></p>
+    <button id="singleConceptionButton">单例</button>
+
+    <p id="notSingletonParagraph"></p>
+    <button id="notSingleConceptionButton">非单例</button>
+  </div>
+
+</body>
+
+<script>
+  const DOM_IDS = {
+    conceptionDemo: 'conceptionDemo',
+    isSingletonParagraph: 'isSingletonParagraph',
+    singleConceptionButton: 'singleConceptionButton',
+    notSingletonParagraph: 'notSingletonParagraph',
+    notSingleConceptionButton: 'notSingleConceptionButton'
+  }
+
+  const DOM_NEED_HANDLE_LIST = {
+    conceptionDemo: document.getElementById(DOM_IDS.conceptionDemo),
+    isSingletonParagraph: document.getElementById(DOM_IDS.isSingletonParagraph),
+    singleConceptionButton: document.getElementById(DOM_IDS.singleConceptionButton),
+    notSingletonParagraph: document.getElementById(DOM_IDS.notSingletonParagraph),
+    notSingleConceptionButton: document.getElementById(DOM_IDS.notSingleConceptionButton)
+  }
+
+  window.onload = function () {
+    initConceptionDemo(DOM_NEED_HANDLE_LIST.conceptionDemo)
+  }
+
+  function initConceptionDemo(conceptionDom) {
+    conceptionDom.addEventListener('click', handleConceptionClick)
+  }
+
+  function handleConceptionClick(event) {
+    const target = event.target
+
+    switch (target.id) {
+      case DOM_IDS.singleConceptionButton:
+        DOM_NEED_HANDLE_LIST.isSingletonParagraph.innerHTML = new Singleton().text()
+        return;
+
+      case DOM_IDS.notSingleConceptionButton:
+        DOM_NEED_HANDLE_LIST.notSingletonParagraph.innerHTML = new SingletonNot().text()
+        return;
+
+      default:
+        break;
+    }
+  }
+
+  function Text() {
+    this.text = function () {
+      this.instance.value += 1
+      return this.instance.value
+    }
+  }
+
+  function SingletonNot() {
+    this.instance = {
+      value: 0
+    }
+  }
+  SingletonNot.prototype = new Text()
+  SingletonNot.instance = new SingletonNot().instance
+  SingletonNot.getInstance = function () {
+    return SingletonNot.instance
+  }
+
+  function Singleton() {
+    this.instance = SingletonNot.getInstance()
+  }
+  Singleton.prototype = new Text()
+</script>
+
+</html>
