@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-06-18 01:07:34
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-06-18 03:02:00
+ * @LastEditTime: 2021-06-19 01:41:07
  * @Description: TODO
 -->
 <!DOCTYPE html>
@@ -18,38 +18,155 @@
       padding: 20px 50px;
     }
 
+    .xzy-page-container {
+      width: 1140px;
+      padding: 0;
+      margin: 0 auto;
+    }
+
     .xzy-link-to {
       float: right;
+    }
+
+    .xzy-demo-block-item {
+      border: 1px solid #eaeefb;
+      background-color: #fafafa;
+      margin-bottom: 10px;
+      padding: 5px 10px;
     }
   </style>
 </head>
 
 <body>
-  <h1>单例模式(Singleton)</h1>
 
-  <h2>百度百科</h2>
-  <p>
-    <q>
-      单例模式，属于创建类型的一种常用的软件设计模式。通过单例模式的方法创建的类在当前进程中只有一个实例（根据需要，也有可能一个线程中属于单例，如：仅线程上下文内使用同一个实例）
-    </q>
-    <br />
-    <a class="xzy-link-to" href="https://baike.baidu.com/item/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">原文链接</a>
-  </p>
+  <div class="xzy-page-container">
+    <h1>单例模式(Singleton)</h1>
 
-  <h2>应用场景</h2>
-  <ul>
-    <li>播放器</li>
-    <li>系统弹出层</li>
-    <li>...</li>
-  </ul>
+    <h2>百度百科</h2>
+    <p>
+      <q>
+        单例模式，属于创建类型的一种常用的软件设计模式。通过单例模式的方法创建的类在当前进程中只有一个实例（根据需要，也有可能一个线程中属于单例，如：仅线程上下文内使用同一个实例）
+      </q>
+      <br />
+      <a class="xzy-link-to" href="https://baike.baidu.com/item/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">原文链接</a>
+    </p>
 
-  <h2>概念级实践</h2>
-  <div id="conceptionDemo">
-    <p id="isSingletonParagraph"></p>
-    <button id="singleConceptionButton">单例</button>
+    <h2>应用场景</h2>
+    <ul>
+      <li>播放器</li>
+      <li>系统弹出层</li>
+      <li>...</li>
+    </ul>
 
-    <p id="notSingletonParagraph"></p>
-    <button id="notSingleConceptionButton">非单例</button>
+    <h2>概念级实践</h2>
+    <div id="conceptionDemo">
+
+      <h3>非单例</h3>
+      <div class="xzy-demo-block-item">
+        <button id="notSingleConceptionButton">非单例</button>
+        <p>
+          <code>new SingletonNot().text() = </code>
+          <span id="notSingletonParagraph"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 非单例 普通类 ====
+
+            function SingletonNot() {
+              this.instance = new InstanceDemo()
+            }
+            SingletonNot.prototype = new Demo()
+          
+            // ==== 非单例 END ====
+          </code>
+        </pre>
+      </div>
+
+      <h3>单例(饿汉)</h3>
+      <div class="xzy-demo-block-item">
+        <button id="singleConceptionButtonOne">单例(饿汉)</button>
+        <p>
+          <code>new SingletonOne().text() = </code>
+          <span id="isSingletonParagraphOne"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 饿汉式单例类：类加载时，就进行对象实例化 ====
+      
+            function SingletonOne() {
+            this.instance = SingletonOne.getInstance()
+            }
+            // 实例化instance
+            SingletonOne.instance = new SingletonNot().instance
+            SingletonOne.getInstance = function () {
+            return SingletonOne.instance
+            }
+            SingletonOne.prototype = new Demo()
+      
+            // ==== 饿汉式单例类 END ====
+          </code>
+        </pre>
+      </div>
+
+      <h3>单例(懒汉)</h3>
+      <div class="xzy-demo-block-item">
+        <button id="singleConceptionButtonTwo">单例(懒汉)</button>
+        <p>
+          <code>new SingletonTwo().text() = </code>
+          <span id="isSingletonParagraphTwo"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 懒汉式单例类: 第一次被调用时将自己实例化 ====
+
+            function SingletonTwo() {
+              this.instance = SingletonTwo.getInstance()
+            }
+            // instance 为 null
+            SingletonTwo.instance = null
+            SingletonTwo.getInstance = function () {
+              // 实例 instance 一次
+              !SingletonTwo.instance && (SingletonTwo.instance = new SingletonNot().instance)
+              return SingletonTwo.instance
+            }
+            SingletonTwo.prototype = new Demo()
+
+            // ==== 懒汉式单例类 END ====
+          </code>
+        </pre>
+      </div>
+
+      <h3>单例(闭包 + 懒汉)</h3>
+      <div class="xzy-demo-block-item">
+        <button id="singleConceptionButtonThree">单例(闭包 + 懒汉)</button>
+        <p>
+          <code>new SingletonThree().text() = </code>
+          <span id="isSingletonParagraphThree"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 闭包实现单例 ====
+
+            let SingletonThree = null;
+
+            ...
+
+            SingletonThree = (function () {
+              let instance = null
+              const InstanceInner = function () {
+                !instance && (instance = new SingletonNot().instance)
+                this.instance = instance
+              }
+              InstanceInner.prototype = new Demo()
+              return InstanceInner
+            })()
+
+            // ==== 闭包实现单例 END ====
+          </code>
+        </pre>
+      </div>
+
+    </div>
   </div>
 
 </body>
@@ -57,19 +174,33 @@
 <script>
   const DOM_IDS = {
     conceptionDemo: 'conceptionDemo',
-    isSingletonParagraph: 'isSingletonParagraph',
-    singleConceptionButton: 'singleConceptionButton',
+
+    isSingletonParagraphOne: 'isSingletonParagraphOne',
+    singleConceptionButtonOne: 'singleConceptionButtonOne',
+    isSingletonParagraphTwo: 'isSingletonParagraphTwo',
+    singleConceptionButtonTwo: 'singleConceptionButtonTwo',
+    isSingletonParagraphThree: 'isSingletonParagraphThree',
+    singleConceptionButtonThree: 'singleConceptionButtonThree',
+
     notSingletonParagraph: 'notSingletonParagraph',
     notSingleConceptionButton: 'notSingleConceptionButton'
   }
 
   const DOM_NEED_HANDLE_LIST = {
     conceptionDemo: document.getElementById(DOM_IDS.conceptionDemo),
-    isSingletonParagraph: document.getElementById(DOM_IDS.isSingletonParagraph),
-    singleConceptionButton: document.getElementById(DOM_IDS.singleConceptionButton),
+
+    isSingletonParagraphOne: document.getElementById(DOM_IDS.isSingletonParagraphOne),
+    singleConceptionButtonOne: document.getElementById(DOM_IDS.singleConceptionButtonOne),
+    isSingletonParagraphTwo: document.getElementById(DOM_IDS.isSingletonParagraphTwo),
+    singleConceptionButtonTwo: document.getElementById(DOM_IDS.singleConceptionButtonTwo),
+    isSingletonParagraphThree: document.getElementById(DOM_IDS.isSingletonParagraphThree),
+    singleConceptionButtonThree: document.getElementById(DOM_IDS.singleConceptionButtonThree),
+
     notSingletonParagraph: document.getElementById(DOM_IDS.notSingletonParagraph),
     notSingleConceptionButton: document.getElementById(DOM_IDS.notSingleConceptionButton)
   }
+
+  let SingletonThree = null;
 
   window.onload = function () {
     initConceptionDemo(DOM_NEED_HANDLE_LIST.conceptionDemo)
@@ -83,8 +214,16 @@
     const target = event.target
 
     switch (target.id) {
-      case DOM_IDS.singleConceptionButton:
-        DOM_NEED_HANDLE_LIST.isSingletonParagraph.innerHTML = new Singleton().text()
+      case DOM_IDS.singleConceptionButtonOne:
+        DOM_NEED_HANDLE_LIST.isSingletonParagraphOne.innerHTML = new SingletonOne().text()
+        return;
+
+      case DOM_IDS.singleConceptionButtonTwo:
+        DOM_NEED_HANDLE_LIST.isSingletonParagraphTwo.innerHTML = new SingletonTwo().text()
+        return;
+
+      case DOM_IDS.singleConceptionButtonThree:
+        SingletonThree && (DOM_NEED_HANDLE_LIST.isSingletonParagraphThree.innerHTML = new SingletonThree().text())
         return;
 
       case DOM_IDS.notSingleConceptionButton:
@@ -96,28 +235,78 @@
     }
   }
 
-  function Text() {
+
+  // ==== 非单例 普通类 ====
+
+  function SingletonNot() {
+    this.instance = new InstanceDemo()
+  }
+  SingletonNot.prototype = new Demo()
+
+  // ==== 非单例 END ====
+
+  // ==== 饿汉式单例类：类加载时，就进行对象实例化 ====
+
+  function SingletonOne() {
+    this.instance = SingletonOne.getInstance()
+  }
+  // 实例化instance
+  SingletonOne.instance = new SingletonNot().instance
+  SingletonOne.getInstance = function () {
+    return SingletonOne.instance
+  }
+  SingletonOne.prototype = new Demo()
+
+  // ==== 饿汉式单例类 END ====
+
+
+  // ==== 懒汉式单例类: 第一次被调用时将自己实例化 ====
+
+  function SingletonTwo() {
+    this.instance = SingletonTwo.getInstance()
+  }
+  // instance 为 null
+  SingletonTwo.instance = null
+  SingletonTwo.getInstance = function () {
+    // 实例 instance 一次
+    !SingletonTwo.instance && (SingletonTwo.instance = new SingletonNot().instance)
+    return SingletonTwo.instance
+  }
+  SingletonTwo.prototype = new Demo()
+
+  // ==== 懒汉式单例类 END ====
+
+
+  // ==== 闭包实现单例 ====
+
+  SingletonThree = (function () {
+    let instance = null
+    const InstanceInner = function () {
+      !instance && (instance = new SingletonNot().instance)
+      this.instance = instance
+    }
+    InstanceInner.prototype = new Demo()
+    return InstanceInner
+  })()
+
+  // ==== 闭包实现单例 END ====
+
+  function Demo() {
+    this.instance = new InstanceDemo()
+
     this.text = function () {
       this.instance.value += 1
       return this.instance.value
     }
-  }
 
-  function SingletonNot() {
-    this.instance = {
-      value: 0
+    this.getInstance = function () {
+      return this.instance
     }
   }
-  SingletonNot.prototype = new Text()
-  SingletonNot.instance = new SingletonNot().instance
-  SingletonNot.getInstance = function () {
-    return SingletonNot.instance
-  }
 
-  function Singleton() {
-    this.instance = SingletonNot.getInstance()
+  function InstanceDemo() {
+    this.value = 0
   }
-  Singleton.prototype = new Text()
 </script>
 
 </html>
