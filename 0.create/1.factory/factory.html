@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-06-18 01:07:34
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-06-19 02:25:40
+ * @LastEditTime: 2021-06-20 02:49:49
  * @Description: TODO
 -->
 <!DOCTYPE html>
@@ -59,46 +59,246 @@
     <h2>概念级实践</h2>
     <div id="">
 
-      <h3>简单工厂</h3>
+      <h3>工厂方法</h3>
       <div class="xzy-demo-block-item">
-        <button id="">简单工厂</button>
+        <button id="factory-button1">工厂方法</button>
         <p>
-          <code></code>
-          <span id=""></span>
+          <span id="factory-text1"></span>
         </p>
         <pre>
           <code>
-            // ==== 简单工厂 START ====
+            // ==== 工厂方法 START ====
 
-            ...
+            function FactoryAbstract() {
+              this.factoryCreate = () => new ProductAbstract();
+            }
 
-            // ==== 简单工厂 END ====
+            function ProductAbstract() {
+              this.productName = '';
+              this.productMethod = function () {
+                return this.productName
+              }
+            }
+
+            function FactoryEntity() {
+              this.factoryCreate = () => new ProductEntity();
+            }
+            FactoryAbstract.prototype = new FactoryAbstract();
+
+            function ProductEntity() {
+              this.productName = 'ProductEntityName';
+            }
+            ProductEntity.prototype = new ProductAbstract();
+
+            function demo1Init() {
+              const factoryEntity = new FactoryEntity()
+
+              const entity = factoryEntity.factoryCreate()
+
+              const text = entity.productMethod()
+
+              printTextById(text, 'factory-text1')
+            }
+            document.getElementById('factory-button1').addEventListener('click', demo1Init)
+
+            // ==== 工厂方法 END ====
           </code>
         </pre>
       </div>
 
 
+      <h3>简单工厂</h3>
+      <div class="xzy-demo-block-item">
+        <button id="factory-button2">简单工厂</button>
+        <p>
+          <span id="factory-text2"></span>
+          <span id="factory-text3"></span>
+        </p>
+        <pre>
+          <code>
 
+            // ==== 简单工厂 START ====
+            const PRODUCT_TYPE = {
+              ProductSimpleEntity1: 1,
+              ProductSimpleEntity2: 2,
+            }
+            function FactorySimpleAbstract() {
+              this.factoryCreate = productType => new ProductSimpleAbstract()
+            }
+            function ProductSimpleAbstract() {
+              this.productName = ''
+              this.productMethod = function () {
+                return this.productName
+              }
+            }
 
+            function FactorySimpleEntity() {
+              this.factoryCreate = function (product) {
+                switch (product) {
+                  case PRODUCT_TYPE.ProductSimpleEntity1:
+                    return new ProductSimpleEntity1()
+
+                  case PRODUCT_TYPE.ProductSimpleEntity2:
+                    return new ProductSimpleEntity2()
+                
+                  default:
+                    break;
+                }
+              }
+            }
+            FactorySimpleEntity.prototype = new FactorySimpleAbstract()
+
+            function ProductSimpleEntity1() {
+              this.productName = 'ProductSimpleEntity1'
+            }
+            ProductSimpleEntity1.prototype = new ProductSimpleAbstract()
+
+            function ProductSimpleEntity2() {
+              this.productName = 'ProductSimpleEntity2'
+            }
+            ProductSimpleEntity2.prototype = new ProductSimpleAbstract()
+
+            function demo2Init() {
+              const factoryEntity = new FactorySimpleEntity()
+
+              const entity1 = factoryEntity.factoryCreate(PRODUCT_TYPE.ProductSimpleEntity1)
+
+              const entity2 = factoryEntity.factoryCreate(PRODUCT_TYPE.ProductSimpleEntity2)
+
+              const text1 = entity1.productMethod()
+
+              const text2 = entity2.productMethod()
+
+              printTextById(text1, 'factory-text2')
+
+              printTextById(text2, 'factory-text3')
+            }
+            document.getElementById('factory-button2').addEventListener('click', demo2Init)
+
+            // ==== 简单工厂 END ====
+
+          </code>
+        </pre>
+      </div>
     </div>
+
   </div>
 
 </body>
 
 <script>
+  // ==== 工厂方法 START ====
 
-function FactoryAbstract() {}
+  function FactoryAbstract() {
+    this.factoryCreate = () => new ProductAbstract();
+  }
 
-function FactoryEntity() {}
+  function ProductAbstract() {
+    this.productName = '';
+    this.productMethod = function () {
+      return this.productName
+    }
+  }
 
-function ProductAbstract() {}
+  function FactoryEntity() {
+    this.factoryCreate = () => new ProductEntity();
+  }
+  FactoryAbstract.prototype = new FactoryAbstract();
 
-function ProductFactory() {}
+  function ProductEntity() {
+    this.productName = 'ProductEntityName';
+  }
+  ProductEntity.prototype = new ProductAbstract();
 
-function demoInit() {}
+  function demo1Init() {
+    const factoryEntity = new FactoryEntity()
 
-window.onload = demoInit
+    const entity = factoryEntity.factoryCreate()
 
+    const text = entity.productMethod()
+
+    printTextById(text, 'factory-text1')
+  }
+  document.getElementById('factory-button1').addEventListener('click', demo1Init)
+
+  // ==== 工厂方法 END ====
+
+
+  // ==== 简单工厂 START ====
+  const PRODUCT_TYPE = {
+    ProductSimpleEntity1: 1,
+    ProductSimpleEntity2: 2,
+  }
+
+  function FactorySimpleAbstract() {
+    this.factoryCreate = productType => new ProductSimpleAbstract()
+  }
+
+  function ProductSimpleAbstract() {
+    this.productName = ''
+    this.productMethod = function () {
+      return this.productName
+    }
+  }
+
+  function FactorySimpleEntity() {
+    this.factoryCreate = function (product) {
+      switch (product) {
+        case PRODUCT_TYPE.ProductSimpleEntity1:
+          return new ProductSimpleEntity1()
+
+        case PRODUCT_TYPE.ProductSimpleEntity2:
+          return new ProductSimpleEntity2()
+
+        default:
+          break;
+      }
+    }
+  }
+  FactorySimpleEntity.prototype = new FactorySimpleAbstract()
+
+  function ProductSimpleEntity1() {
+    this.productName = 'ProductSimpleEntity1'
+  }
+  ProductSimpleEntity1.prototype = new ProductSimpleAbstract()
+
+  function ProductSimpleEntity2() {
+    this.productName = 'ProductSimpleEntity2'
+  }
+  ProductSimpleEntity2.prototype = new ProductSimpleAbstract()
+
+  function demo2Init() {
+    const factoryEntity = new FactorySimpleEntity()
+
+    const entity1 = factoryEntity.factoryCreate(PRODUCT_TYPE.ProductSimpleEntity1)
+
+    const entity2 = factoryEntity.factoryCreate(PRODUCT_TYPE.ProductSimpleEntity2)
+
+    const text1 = entity1.productMethod()
+
+    const text2 = entity2.productMethod()
+
+    printTextById(text1, 'factory-text2')
+
+    printTextById(text2, 'factory-text3')
+  }
+  document.getElementById('factory-button2').addEventListener('click', demo2Init)
+
+  // ==== 简单工厂 END ====
+
+  function printTextToDom(text, dom) {
+    dom.innerText = text
+  }
+
+  function printTextByClassName(text, className) {
+    document.getElementsByClassName(className).forEach(domItem => {
+      domItem.innerText = text;
+    })
+  }
+
+  function printTextById(text, id) {
+    document.getElementById(id).innerText = text;
+  }
 </script>
 
 </html>
