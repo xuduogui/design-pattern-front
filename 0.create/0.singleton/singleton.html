@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-06-18 01:07:34
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-06-19 01:55:07
+ * @LastEditTime: 2021-06-20 22:56:37
  * @Description: TODO
 -->
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Singleton</title>
+  <title>Singleton Pattern</title>
   <style>
     body {
       padding: 20px 50px;
@@ -180,7 +180,7 @@
 
     notSingletonParagraph: 'notSingletonParagraph',
     notSingleConceptionButton: 'notSingleConceptionButton'
-  }
+  };
 
   const DOM_NEED_HANDLE_LIST = {
     conceptionDemo: document.getElementById(DOM_IDS.conceptionDemo),
@@ -194,64 +194,64 @@
 
     notSingletonParagraph: document.getElementById(DOM_IDS.notSingletonParagraph),
     notSingleConceptionButton: document.getElementById(DOM_IDS.notSingleConceptionButton)
-  }
+  };
 
   let SingletonThree = null;
 
   window.onload = function () {
-    initConceptionDemo(DOM_NEED_HANDLE_LIST.conceptionDemo)
-  }
+    initConceptionDemo(DOM_NEED_HANDLE_LIST.conceptionDemo);
+  };
 
   function initConceptionDemo(conceptionDom) {
-    conceptionDom.addEventListener('click', handleConceptionClick)
-  }
+    conceptionDom.addEventListener('click', handleConceptionClick);
+  };
 
   function handleConceptionClick(event) {
-    const target = event.target
+    const target = event.target;
 
     switch (target.id) {
       case DOM_IDS.singleConceptionButtonOne:
-        DOM_NEED_HANDLE_LIST.isSingletonParagraphOne.innerHTML = new SingletonOne().text()
+        DOM_NEED_HANDLE_LIST.isSingletonParagraphOne.innerHTML = new SingletonOne().text();
         return;
 
       case DOM_IDS.singleConceptionButtonTwo:
-        DOM_NEED_HANDLE_LIST.isSingletonParagraphTwo.innerHTML = new SingletonTwo().text()
+        DOM_NEED_HANDLE_LIST.isSingletonParagraphTwo.innerHTML = new SingletonTwo().text();
         return;
 
       case DOM_IDS.singleConceptionButtonThree:
-        SingletonThree && (DOM_NEED_HANDLE_LIST.isSingletonParagraphThree.innerHTML = new SingletonThree().text())
+        SingletonThree && (DOM_NEED_HANDLE_LIST.isSingletonParagraphThree.innerHTML = new SingletonThree().text());
         return;
 
       case DOM_IDS.notSingleConceptionButton:
-        DOM_NEED_HANDLE_LIST.notSingletonParagraph.innerHTML = new SingletonNot().text()
+        DOM_NEED_HANDLE_LIST.notSingletonParagraph.innerHTML = new SingletonNot().text();
         return;
 
       default:
         break;
-    }
-  }
+    };
+  };
 
 
   // ==== 非单例 普通类 ====
 
   function SingletonNot() {
-    this.instance = new InstanceDemo()
-  }
-  SingletonNot.prototype = new Demo()
+    this.instance = new InstanceDemo();
+  };
+  SingletonNot.prototype = new Demo();
 
   // ==== 非单例 END ====
 
   // ==== 饿汉式单例类：类加载时，就进行对象实例化 ====
 
   function SingletonOne() {
-    this.instance = SingletonOne.getInstance()
-  }
+    this.instance = SingletonOne.getInstance();
+  };
   // 实例化instance
-  SingletonOne.instance = new SingletonNot().instance
+  SingletonOne.instance = new SingletonNot().instance;
   SingletonOne.getInstance = function () {
-    return SingletonOne.instance
-  }
-  SingletonOne.prototype = new Demo()
+    return SingletonOne.instance;
+  };
+  SingletonOne.prototype = new Demo();
 
   // ==== 饿汉式单例类 END ====
 
@@ -259,16 +259,16 @@
   // ==== 懒汉式单例类: 第一次被调用时将自己实例化 ====
 
   function SingletonTwo() {
-    this.instance = SingletonTwo.getInstance()
-  }
+    this.instance = SingletonTwo.getInstance();
+  };
   // instance 为 null
-  SingletonTwo.instance = null
+  SingletonTwo.instance = null;
   SingletonTwo.getInstance = function () {
     // 实例 instance 一次
-    !SingletonTwo.instance && (SingletonTwo.instance = new SingletonNot().instance)
-    return SingletonTwo.instance
-  }
-  SingletonTwo.prototype = new Demo()
+    !SingletonTwo.instance && (SingletonTwo.instance = new SingletonNot().instance);
+    return SingletonTwo.instance;
+  };
+  SingletonTwo.prototype = new Demo();
 
   // ==== 懒汉式单例类 END ====
 
@@ -276,33 +276,33 @@
   // ==== 闭包实现单例 ====
 
   SingletonThree = (function () {
-    let instance = null
+    let instance = null;
     const InstanceInner = function () {
-      !instance && (instance = new SingletonNot().instance)
-      this.instance = instance
-    }
-    InstanceInner.prototype = new Demo()
-    return InstanceInner
+      !instance && (instance = new SingletonNot().instance);
+      this.instance = instance;
+    };
+    InstanceInner.prototype = new Demo();
+    return InstanceInner;
   })()
 
   // ==== 闭包实现单例 END ====
 
   function Demo() {
-    this.instance = new InstanceDemo()
+    this.instance = new InstanceDemo();
 
     this.text = function () {
-      this.instance.value += 1
-      return this.instance.value
-    }
+      this.instance.value += 1;
+      return this.instance.value;
+    };
 
     this.getInstance = function () {
-      return this.instance
-    }
-  }
+      return this.instance;
+    };
+  };
 
   function InstanceDemo() {
-    this.value = 0
-  }
+    this.value = 0;
+  };
 </script>
 
 </html>
