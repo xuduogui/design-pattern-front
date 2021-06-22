@@ -1,0 +1,372 @@
+<!--
+ * @Author: xuziyong
+ * @Date: 2021-06-18 01:07:34
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-06-22 22:57:29
+ * @Description: TODO
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abstract & Factory Method - Factory Pattern</title>
+  <style>
+    body {
+      padding: 20px 50px;
+    }
+
+    .xzy-page-container {
+      width: 1140px;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .xzy-link-to {
+      float: right;
+    }
+
+    .xzy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .xzy-demo-block-item {
+      width: 48%;
+      border: 1px solid #eaeefb;
+      background-color: #fafafa;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="xzy-page-container">
+    <h1>工厂方法模式(Factory Method Pattern)</h1>
+
+    <h2>简述</h2>
+    <p>
+      抽象工厂: 产品等级不限于同一层级；工厂抽象定义工厂的模式，由实例工厂负责实现具体的产品调度；
+    </p>
+
+    <h2>应用场景</h2>
+    <ul>
+      <li>...</li>
+    </ul>
+
+    <h2>概念级实践</h2>
+    <div id="" class="xzy-row">
+
+      <div class="xzy-demo-block-item">
+        <h3>抽象工厂</h3>
+        <button id="factory-abstract-button1">抽象工厂</button>
+        <p>
+          <span id="factory-abstract-textA1"></span>
+          <span id="factory-abstract-textB1"></span>
+          <span id="factory-abstract-textA2"></span>
+          <span id="factory-abstract-textB2"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 抽象工厂 START ====
+
+            function AbstractFactory() {
+              this.factoryCreateA = () => new AbstractProductA();
+              this.factoryCreateB = () => new AbstractProductB();
+            };
+
+            function AbstractProductA() {
+              this.productName = '';
+              this.productMethod = function () {
+                return this.productName;
+              };
+            };
+            function AbstractProductB() {
+              this.productName = '';
+              this.productMethod = function () {
+                return this.productName;
+              };
+            };
+
+            function ClassFactory1() {
+              this.factoryCreateA = () => new ClassProductA1();
+              this.factoryCreateB = () => new ClassProductB1();
+            };
+            ClassFactory1.prototype = new AbstractFactory();
+            function ClassFactory2() {
+              this.factoryCreateA = () => new ClassProductA2();
+              this.factoryCreateB = () => new ClassProductB2();
+            };
+            ClassFactory2.prototype = new AbstractFactory();
+
+            function ClassProductA1() {
+              this.productName = 'ClassProductA1';
+            };
+            ClassProductA1.prototype = new AbstractProductA();
+
+            function ClassProductA2() {
+              this.productName = 'ClassProductA2';
+            };
+            ClassProductA2.prototype = new AbstractProductA();
+            function ClassProductB1() {
+              this.productName = 'ClassProductB1';
+            };
+            ClassProductB1.prototype = new AbstractProductB();
+            function ClassProductB2() {
+              this.productName = 'ClassProductB2';
+            };
+            ClassProductB2.prototype = new AbstractProductB();
+
+            function demo1Init() {
+              const factory1 = new ClassFactory1();
+              const factory2 = new classfactory2();
+              const productA1 = factory1.factoryCreateA()
+              const productB1 = factory1.factoryCreateB()
+              const productA2 = factory2.factoryCreateA()
+              const productB2 = factory2.factoryCreateB()
+              printTextById(
+                productA1.productMethod(), 'factory-abstract-textA1'
+              );
+              printTextById(
+                productB1.productMethod(), 'factory-abstract-textB1'
+              );
+              printTextById(
+                productA2.productMethod(), 'factory-abstract-textA2'
+              );
+              printTextById(
+                productB1.productMethod(), 'factory-abstract-textB2'
+              );
+            };
+            document.getElementById('factory-abstract-button1')
+              .addEventListener('click', demo1Init);
+
+            // ==== 抽象工厂 END ====
+          </code>
+        </pre>
+      </div>
+
+      <div class="xzy-demo-block-item">
+        <h3>工厂方法</h3>
+        <button id="factory-button1">工厂方法</button>
+        <p>
+          <span id="factory1-text"></span>
+          <span id="factory2-text"></span>
+        </p>
+        <pre>
+          <code>
+            // ==== 工厂方法 START ====
+
+            function AbstractFactory() {
+              this.factoryCreate = () => new AbstractProduct();
+            };
+
+            function AbstractProduct1() {
+              this.productName = '';
+              this.productMethod = function () {
+                return this.productName;
+              }
+            };
+
+            function AbstractProduct2() {
+              this.productName = '';
+              this.productMethod = function () {
+                return this.productName;
+              }
+            };
+
+            function Factory1() {
+              this.factoryCreate = () => new Product1();
+            };
+            Factory1.prototype = new AbstractFactory();
+            function Factory2() {
+              this.factoryCreate = () => new Product2();
+            };
+            Factory2.prototype = new AbstractFactory();
+
+            function Product1() {
+              this.productName = 'Product1';
+            };
+            Product1.prototype = new AbstractProduct1();
+            function Product2() {
+              this.productName = 'Product2';
+            };
+            Product2.prototype = new AbstractProduct2();
+
+            function demo1Init() {
+              const factory1 = new Factory1();
+              const entity1 = factory1.factoryCreate();
+              printTextById(entity1.productMethod(), 'factory1-text');
+          
+              const factory2 = new Factory2();
+              const entity2 = factory2.factoryCreate();
+              printTextById(entity2.productMethod(), 'factory2-text');
+            };
+            document.getElementById('factory-button1')
+              .addEventListener('click', demo1Init);
+
+            // ==== 工厂方法 END ====
+          </code>
+        </pre>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+<script>
+  // ==== 抽象工厂 START ====
+
+  function AbstractFactory() {
+    this.factoryCreateA = () => new AbstractProductA();
+    this.factoryCreateB = () => new AbstractProductB();
+  };
+
+  function AbstractProductA() {
+    this.productName = '';
+    this.productMethod = function () {
+      return this.productName;
+    };
+  };
+
+  function AbstractProductB() {
+    this.productName = '';
+    this.productMethod = function () {
+      return this.productName;
+    };
+  };
+
+  function ClassFactory1() {
+    this.factoryCreateA = () => new ClassProductA1();
+    this.factoryCreateB = () => new ClassProductB1();
+  };
+  ClassFactory1.prototype = new AbstractFactory();
+
+  function ClassFactory2() {
+    this.factoryCreateA = () => new ClassProductA2();
+    this.factoryCreateB = () => new ClassProductB2();
+  };
+  ClassFactory2.prototype = new AbstractFactory();
+
+  function ClassProductA1() {
+    this.productName = 'ClassProductA1';
+  };
+  ClassProductA1.prototype = new AbstractProductA();
+
+  function ClassProductA2() {
+    this.productName = 'ClassProductA2';
+  };
+  ClassProductA2.prototype = new AbstractProductA();
+
+  function ClassProductB1() {
+    this.productName = 'ClassProductB1';
+  };
+  ClassProductB1.prototype = new AbstractProductB();
+
+  function ClassProductB2() {
+    this.productName = 'ClassProductB2';
+  };
+  ClassProductB2.prototype = new AbstractProductB();
+
+  function demoAbstractInit() {
+    const factory1 = new ClassFactory1();
+    const factory2 = new ClassFactory2();
+    const productA1 = factory1.factoryCreateA()
+    const productB1 = factory1.factoryCreateB()
+    const productA2 = factory2.factoryCreateA()
+    const productB2 = factory2.factoryCreateB()
+    printTextById(
+      productA1.productMethod(), 'factory-abstract-textA1'
+    );
+    printTextById(
+      productB1.productMethod(), 'factory-abstract-textB1'
+    );
+    printTextById(
+      productA2.productMethod(), 'factory-abstract-textA2'
+    );
+    printTextById(
+      productB1.productMethod(), 'factory-abstract-textB2'
+    );
+  };
+  document.getElementById('factory-abstract-button1')
+    .addEventListener('click', demoAbstractInit);
+
+  // ==== 抽象工厂 END ====
+
+
+  // ==== 工厂方法 START ====
+
+  function AbstractFactory() {
+    this.factoryCreate = () => new AbstractProduct();
+  };
+
+  function AbstractProduct1() {
+    this.productName = '';
+    this.productMethod = function () {
+      return this.productName;
+    }
+  };
+
+  function AbstractProduct2() {
+    this.productName = '';
+    this.productMethod = function () {
+      return this.productName;
+    }
+  };
+
+  function Factory1() {
+    this.factoryCreate = () => new Product1();
+  };
+  Factory1.prototype = new AbstractFactory();
+
+  function Factory2() {
+    this.factoryCreate = () => new Product2();
+  };
+  Factory2.prototype = new AbstractFactory();
+
+  function Product1() {
+    this.productName = 'Product1';
+  };
+  Product1.prototype = new AbstractProduct1();
+
+  function Product2() {
+    this.productName = 'Product2';
+  };
+  Product2.prototype = new AbstractProduct2();
+
+  function demo1Init() {
+    const factory1 = new Factory1();
+    const entity1 = factory1.factoryCreate();
+    printTextById(entity1.productMethod(), 'factory1-text');
+
+    const factory2 = new Factory2();
+    const entity2 = factory2.factoryCreate();
+    printTextById(entity2.productMethod(), 'factory2-text');
+  };
+  document.getElementById('factory-button1')
+    .addEventListener('click', demo1Init);
+
+  // ==== 工厂方法 END ====
+
+
+  function printTextToDom(text, dom) {
+    dom.innerText = text;
+  };
+
+  function printTextByClassName(text, className) {
+    document.getElementsByClassName(className).forEach(domItem => {
+      domItem.innerText = text;
+    });
+  };
+
+  function printTextById(text, id) {
+    document.getElementById(id).innerText = text;
+  };
+</script>
+
+</html>
