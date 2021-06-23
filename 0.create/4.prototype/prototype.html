@@ -1,0 +1,185 @@
+<!--
+ * @Author: xuziyong
+ * @Date: 2021-06-18 01:07:34
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-06-24 00:38:55
+ * @Description: TODO
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pototype Pattern</title>
+  <style>
+    body {
+      padding: 20px 50px;
+    }
+
+    .xzy-page-container {
+      width: 1140px;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .xzy-link-to {
+      float: right;
+    }
+
+    .xzy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .xzy-demo-block-item {
+      width: 48%;
+      border: 1px solid #eaeefb;
+      background-color: #fafafa;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="xzy-page-container">
+    <h1>原型模式(Prototype Pattern)</h1>
+
+    <h2>简述</h2>
+    <p>
+      原型模式: 高性能复制对象的方法；
+    </p>
+
+    <h2>应用场景</h2>
+    <ul>
+      <li>...</li>
+    </ul>
+
+    <h2>概念级实践</h2>
+    <div id="" class="xzy-row">
+
+      <div class="xzy-demo-block-item">
+        <h3>原型模式</h3>
+        <button id="prototype-button">原型模式</button>
+        <div id="prototype-text"></div>
+        <pre>
+          <code>
+            // ==== 原型模式 START ====
+
+            document.getElementById('prototype-button')
+              .addEventListener('click', client);
+
+            function client() {
+              const dom = document.getElementById('prototype-text');
+              dom.innerHTML = '';
+              const concretePrototype = new ConcretePrototype();
+              let max = 10;
+              let index = 0;
+              while (index < max) {
+                const clonePrototype = concretePrototype.clone();
+                clonePrototype.setPrototypeName(`<p/>我是克隆的第${index + 1}个原型数据<p/>`)
+                dom.innerHTML += clonePrototype.getPrototypeName();
+                index++;
+              };
+            };
+
+            function AbstractPrototype() {
+              this.prototypeName = '';
+              this.prototypePart = '';
+              this.setPrototypeName = function (value) {};
+              this.getPrototypeName = function (value) {};
+              this.setPrototypePart = function (value) {};
+              this.getPrototypePart = function (value) {};
+              this.clone = function () {};
+            };
+
+            function ConcretePrototype() {
+              this.prototypeName = 'prototype'
+              this.prototypePart = 'prototypePart'
+              this.setPrototypeName = function (value) {
+                this.prototypeName = value;
+              };
+              this.getPrototypeName = function (value) {
+                return this.prototypeName;
+              };
+              this.setPrototypePart = function (value) {
+                this.prototypePart = value;
+              };
+              this.getPrototypePart = function (value) {
+                return this.prototypePart;
+              };
+              this.clone = function () {
+                return Object.create(this);
+              };
+            };
+            ConcretePrototype.prototype = new AbstractPrototype()
+
+            // ==== 原型模式 END ====
+          </code>
+        </pre>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+<script>
+  // ==== 原型模式 START ====
+
+  document.getElementById('prototype-button')
+    .addEventListener('click', client);
+
+  function client() {
+    const dom = document.getElementById('prototype-text');
+    dom.innerHTML = '';
+    const concretePrototype = new ConcretePrototype();
+    let max = 10;
+    let index = 0;
+    while (index < max) {
+      const clonePrototype = concretePrototype.clone();
+      clonePrototype.setPrototypeName(`<p/>我是克隆的第${index + 1}个原型数据<p/>`)
+      dom.innerHTML += clonePrototype.getPrototypeName();
+      index++;
+    };
+  };
+
+  function AbstractPrototype() {
+    this.prototypeName = '';
+    this.prototypePart = '';
+    this.setPrototypeName = function (value) {};
+    this.getPrototypeName = function (value) {};
+    this.setPrototypePart = function (value) {};
+    this.getPrototypePart = function (value) {};
+    this.clone = function () {};
+  };
+
+  function ConcretePrototype() {
+    this.prototypeName = 'prototype'
+    this.prototypePart = 'prototypePart'
+    this.setPrototypeName = function (value) {
+      this.prototypeName = value;
+    };
+    this.getPrototypeName = function (value) {
+      return this.prototypeName;
+    };
+    this.setPrototypePart = function (value) {
+      this.prototypePart = value;
+    };
+    this.getPrototypePart = function (value) {
+      return this.prototypePart;
+    };
+    this.clone = function () {
+      return Object.create(this);
+    };
+  };
+  ConcretePrototype.prototype = new AbstractPrototype()
+
+  // ==== 原型模式 END ====
+</script>
+
+</html>
