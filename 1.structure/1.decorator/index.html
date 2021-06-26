@@ -1,0 +1,102 @@
+<!--
+ * @Author: xuziyong
+ * @Date: 2021-06-18 01:07:34
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-06-27 00:56:40
+ * @Description: TODO
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decorator Pattern</title>
+  <link rel="stylesheet" href="../../z.lib/app.css">
+</head>
+
+<body>
+
+  <div class="xzy-page-container">
+    <h1>装饰模式(Decorator Pattern)</h1>
+
+    <h2>简述</h2>
+    <p>
+      装饰模式: 通过代理层控制目标；
+    </p>
+
+    <h2>应用场景</h2>
+    <ul>
+      <li>...</li>
+    </ul>
+
+    <h2>概念级实践</h2>
+    <div id="" class="xzy-row">
+
+      <div class="xzy-demo-block-item">
+        <h3>装饰模式</h3>
+        <button id="decorator-button">装饰模式</button>
+        <pre>
+          <code>
+            class AbstractComponent {
+              needDecorated () {return ''}
+            }
+            
+            class ConcreteComponent extends AbstractComponent {
+              noDecorateString = ''
+              constructor() {
+                super()
+                this.noDecorateString = 'no decorate string!'
+              }
+              needDecorated () {
+                return this.noDecorateString
+              }
+            }
+            
+            class Decorator extends AbstractComponent {
+              concreteComponent = null
+              constructor(concreteComponent) {
+                super()
+                this.concreteComponent = concreteComponent
+              }
+              needDecorated() {
+                return this.concreteComponent.needDecorated()
+              }
+            }
+            
+            class ConcreteDecorator extends Decorator {
+              constructor(concreteComponent) {
+                super(concreteComponent)
+              }
+              needDecorated() {
+                this.decorateAddMethods()
+                const superReturn = super.needDecorated()
+                return superReturn
+              }
+              decorateAddMethods() {
+                console.log('there are decorated!')
+              }
+            }
+            
+            function pageInit() {
+              const needDecoratedComponent = new ConcreteComponent()
+              const isDecoratedComponent = new ConcreteDecorator(needDecoratedComponent)
+              console.log(needDecoratedComponent.needDecorated())
+              console.log(isDecoratedComponent.needDecorated()) 
+            }
+            
+            document.getElementById('decorator-button')
+              .addEventListener('click', pageInit)
+          </code>
+        </pre>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+
+</body>
+
+</html>

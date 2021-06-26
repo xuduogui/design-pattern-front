@@ -2,12 +2,11 @@
  * @Author: xuziyong
  * @Date: 2021-06-26 22:23:23
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-06-26 23:14:30
+ * @LastEditTime: 2021-06-27 00:56:02
  * @Description: TODO
  */
 
 class AbstractComponent {
-  constructor() {}
   needDecorated () {return ''}
 }
 
