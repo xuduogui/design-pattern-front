@@ -1,0 +1,81 @@
+<!--
+ * @Author: xuziyong
+ * @Date: 2021-06-18 01:07:34
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-06-27 00:57:00
+ * @Description: TODO
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adapter Pattern</title>
+  <link rel="stylesheet" href="../../z.lib/app.css">
+</head>
+
+<body>
+
+  <div class="xzy-page-container">
+    <h1>适配器模式(Adapter Pattern)</h1>
+
+    <h2>简述</h2>
+    <p>
+      适配器模式: 使用目标类访问原始类；
+    </p>
+
+    <h2>应用场景</h2>
+    <ul>
+      <li>...</li>
+    </ul>
+
+    <h2>概念级实践</h2>
+    <div id="" class="xzy-row">
+
+      <div class="xzy-demo-block-item">
+        <h3>适配器模式</h3>
+        <button id="adapter-button">适配器模式</button>
+        <pre>
+          <code>
+            class Adaptee {
+              needAdaptedMethod() {
+                return 'adapte method!'
+              }
+            }
+            
+            class AbstructTarget {
+              method() {return ''}
+            }
+            
+            class Adapter extends Adaptee {
+              constructor() {
+                super()
+              }
+              // from implement AbstructTarget 
+              method() {
+                return super.needAdaptedMethod()
+              }
+            }
+            
+            function pageInit() {
+              const adaptee = new Adaptee()
+              console.log(adaptee.needAdaptedMethod())
+            
+              const target = new Adapter()
+              console.log(target.method())
+            }
+            document.getElementById('adapter-button')
+              .addEventListener('click', pageInit)
+          </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
