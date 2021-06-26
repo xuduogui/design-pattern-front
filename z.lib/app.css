@@ -1,0 +1,27 @@
+body {
+  padding: 20px 50px;
+}
+
+.xzy-page-container {
+  width: 1140px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.xzy-link-to {
+  float: right;
+}
+
+.xzy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.xzy-demo-block-item {
+  width: 48%;
+  border: 1px solid #eaeefb;
+  background-color: #fafafa;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
