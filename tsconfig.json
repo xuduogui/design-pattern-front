@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "rootDir": ".",
+    "target": "es2020",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "allowJs": false,
+    // "types": [
+    //   "webpack-env"
+    // ],
+    "typeRoots": [
+      "node_modules/@types/",
+      "src/@types"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "es2020",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+  },
+  "include": [
+    "src/**/*",
+    // "src/**/*.tsx",
+    // "src/**/*.vue",
+    // "tests/**/*.ts",
+    // "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}
