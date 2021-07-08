@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-09 02:19:24
+ * @LastEditTime: 2021-07-09 02:36:59
  * @Description: TODO
  */
 
@@ -11,6 +11,7 @@ import { bridgeInit } from "./1.structure/4.bridge/bridge";
 import { facadeInit } from "./1.structure/5.facade/facade";
 import { flyweightInit } from "./1.structure/6.flyweight/flyweight";
 import { templateInit } from "./2.behavior/0.template/template";
+import { commandInit } from "./2.behavior/1.command/command";
 
 console.log('========== 开始组合模式 ==========')
 compositeInit()
@@ -31,3 +32,7 @@ console.log('========== 享元模式结束 ==========')
 console.log('========== 开始模板方法模式 ==========')
 templateInit()
 console.log('========== 模板方法模式结束 ==========')
+
+console.log('========== 开始命令模式 ==========')
+commandInit()
+console.log('========== 命令模式结束 ==========')
