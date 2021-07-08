@@ -3,7 +3,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-08 19:56:32
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-08 21:42:28
+ * @LastEditTime: 2021-07-08 23:32:50
  * @Description: TODO
  */
 var __extends = (this && this.__extends) || (function () {
@@ -27,9 +27,6 @@ var Abstration = /** @class */ (function () {
     function Abstration(imp) {
         this.imp = imp;
     }
-    Abstration.prototype.operation = function () {
-        return this.imp.operationImp();
-    };
     return Abstration;
 }());
 var ConcreteImp1 = /** @class */ (function () {
@@ -64,7 +61,7 @@ var ConcreteAbstraction1 = /** @class */ (function (_super) {
         return _this;
     }
     ConcreteAbstraction1.prototype.operation = function () {
-        return 'operationImp: ' + _super.prototype.operation.call(this) + '; name: ' + this.name;
+        return 'operationImp: ' + this.imp.operationImp() + '; name: ' + this.name;
     };
     return ConcreteAbstraction1;
 }(Abstration));
@@ -76,7 +73,7 @@ var ConcreteAbstraction2 = /** @class */ (function (_super) {
         return _this;
     }
     ConcreteAbstraction2.prototype.operation = function () {
-        return 'operationImp: ' + _super.prototype.operation.call(this) + '; name: ' + this.name;
+        return 'operationImp: ' + this.imp.operationImp() + '; name: ' + this.name;
     };
     return ConcreteAbstraction2;
 }(Abstration));
