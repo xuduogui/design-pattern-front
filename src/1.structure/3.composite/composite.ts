@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:04
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-08 19:20:37
+ * @LastEditTime: 2021-07-08 23:05:27
  * @Description: TODO
  */
 function arrayRemoveElement<T>(element: T, arrayList: Array<T>): boolean {
@@ -87,7 +87,7 @@ export const compositeInit = () => {
   const leaf6 = new Leaf('leaf6')
   root.add(branch1)
   branch1.add(leaf1)
-  console.log('第一次遍历打印')
+  console.log('组合模式第一次遍历打印')
   root.handleOperation()
   setTimeout(() => {
     root.remove(branch1)
@@ -99,7 +99,7 @@ export const compositeInit = () => {
     branch3.add(leaf4)
     branch3.add(leaf5)
     branch3.add(leaf6)
-    console.log('第二次遍历打印')
+    console.log('组合模式第二次遍历打印')
     root.handleOperation()
   }, 4000);
 }
