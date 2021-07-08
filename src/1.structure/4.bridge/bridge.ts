@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-08 19:56:32
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-08 21:42:28
+ * @LastEditTime: 2021-07-08 23:32:50
  * @Description: TODO
  */
 
@@ -10,14 +10,12 @@ interface Implementor {
   operationImp(): string;
 }
 
-class Abstration {
-  imp: Implementor;
+abstract class Abstration {
+  protected readonly imp: Implementor;
   constructor(imp: Implementor) {
     this.imp = imp
   }
-  public operation(): string {
-    return this.imp.operationImp()
-  }
+  abstract operation(): string 
 }
 
 class ConcreteImp1 implements Implementor {
@@ -42,7 +40,7 @@ class ConcreteAbstraction1 extends Abstration {
     this.name = 'ConcreteAbstraction1'
   }
   operation(): string {
-    return 'operationImp: ' + super.operation() + '; name: ' + this.name
+    return 'operationImp: ' + this.imp.operationImp() + '; name: ' + this.name
   }
 }
 class ConcreteAbstraction2 extends Abstration {
@@ -52,7 +50,7 @@ class ConcreteAbstraction2 extends Abstration {
     this.name = 'ConcreteAbstraction2'
   }
   operation(): string {
-    return 'operationImp: ' + super.operation() + '; name: ' + this.name
+    return 'operationImp: ' + this.imp.operationImp() + '; name: ' + this.name
   }
 }
 
