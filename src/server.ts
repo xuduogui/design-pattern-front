@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-10 17:29:23
+ * @LastEditTime: 2021-07-10 21:31:45
  * @Description: TODO
  */
 
@@ -13,6 +13,7 @@ import { flyweightInit } from "./1.structure/6.flyweight/flyweight";
 import { templateInit } from "./2.behavior/0.template/template";
 import { commandInit } from "./2.behavior/1.command/command";
 import { chainOfResponsibility } from "./2.behavior/2.chainOfResponsibility/chainOfResponsibility";
+import { strategyInit } from "./2.behavior/3.strategy/strategy";
 
 console.log('========== 开始组合模式 ==========')
 compositeInit()
@@ -41,3 +42,7 @@ console.log('========== 命令模式结束 ==========')
 console.log('========== 开始责任链模式 ==========')
 chainOfResponsibility()
 console.log('========== 责任链模式结束 ==========')
+
+console.log('========== 开始策略模式 ==========')
+strategyInit()
+console.log('========== 策略模式结束 ==========')

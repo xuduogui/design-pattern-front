@@ -3,7 +3,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-10 16:02:11
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-10 17:57:48
+ * @LastEditTime: 2021-07-10 18:11:14
  * @Description: TODO
  */
 var __extends = (this && this.__extends) || (function () {
@@ -25,22 +25,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.chainOfResponsibility = void 0;
 var Handler = /** @class */ (function () {
     function Handler(target) {
-        this.handerTarget = null;
-        this.setTarget(target);
+        this.nextHandleTarget = null;
+        this.setNextTarget(target);
     }
-    Handler.prototype.getTarget = function () {
-        return this.handerTarget;
+    Handler.prototype.getNextTarget = function () {
+        return this.nextHandleTarget;
     };
-    Handler.prototype.setTarget = function (target) {
-        this.handerTarget = target;
+    Handler.prototype.setNextTarget = function (target) {
+        this.nextHandleTarget = target;
     };
     Handler.prototype.next = function (tag) {
-        var nextTarget = this.getTarget();
+        var nextTarget = this.getNextTarget();
         if (nextTarget !== null) {
             nextTarget.handle(tag);
         }
         else {
-            console.log(tag, '责任链结束');
+            console.log(tag, '责任链结束, 无符合项目');
         }
     };
     return Handler;

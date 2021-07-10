@@ -2,24 +2,24 @@
  * @Author: xuziyong
  * @Date: 2021-07-10 16:02:11
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-10 17:58:39
+ * @LastEditTime: 2021-07-10 18:11:14
  * @Description: TODO
  */
 
 abstract class Handler {
-  private handerTarget: Handler | null = null
+  private nextHandleTarget: Handler | null = null
   public abstract handle(tag: string): void
   constructor(target: Handler | null) {
-    this.setTarget(target)
+    this.setNextTarget(target)
   }
-  public getTarget(): Handler | null {
-    return this.handerTarget
+  public getNextTarget(): Handler | null {
+    return this.nextHandleTarget
   }
-  public setTarget(target: Handler | null) {
-    this.handerTarget = target
+  public setNextTarget(target: Handler | null) {
+    this.nextHandleTarget = target
   }
   public next(tag: string): void {
-    const nextTarget = this.getTarget()
+    const nextTarget = this.getNextTarget()
     if (nextTarget !== null) {
       nextTarget.handle(tag)
     } else {
