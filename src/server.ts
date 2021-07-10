@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-10 23:18:30
+ * @LastEditTime: 2021-07-11 00:51:18
  * @Description: TODO
  */
 
@@ -16,6 +16,7 @@ import { chainOfResponsibility } from "./2.behavior/2.chainOfResponsibility/chai
 import { strategyInit } from "./2.behavior/3.strategy/strategy";
 import { iteratorInit } from "./2.behavior/4.iterator/iterator";
 import { mediatorInit } from "./2.behavior/5.mediator/mediator";
+import { observerInit } from "./2.behavior/6.observer/observer";
 
 console.log('========== 开始组合模式 ==========')
 compositeInit()
@@ -56,3 +57,7 @@ console.log('========== 迭代器模式结束 ==========')
 console.log('========== 开始中介者模式 ==========')
 mediatorInit()
 console.log('========== 中介者模式结束 ==========')
+
+console.log('========== 开始观察者模式 ==========')
+observerInit()
+console.log('========== 观察者模式结束 ==========')
