@@ -1,4 +1,11 @@
 "use strict";
+/*
+ * @Author: xuziyong
+ * @Date: 2021-07-09 02:26:21
+ * @LastEditors: xuziyong
+ * @LastEditTime: 2021-07-09 18:37:00
+ * @Description: TODO
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.commandInit = void 0;
 var Receiver = /** @class */ (function () {

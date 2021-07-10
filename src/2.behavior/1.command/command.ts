@@ -2,9 +2,11 @@
  * @Author: xuziyong
  * @Date: 2021-07-09 02:26:21
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-09 02:36:34
+ * @LastEditTime: 2021-07-09 18:37:00
  * @Description: TODO
  */
+
+// TODO 理解命令模式使用场景
 interface Command {
   execute(): void
 }
