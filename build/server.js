@@ -3,7 +3,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-11 00:51:18
+ * @LastEditTime: 2021-07-11 01:14:10
  * @Description: TODO
  */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -18,6 +18,7 @@ var strategy_1 = require("./2.behavior/3.strategy/strategy");
 var iterator_1 = require("./2.behavior/4.iterator/iterator");
 var mediator_1 = require("./2.behavior/5.mediator/mediator");
 var observer_1 = require("./2.behavior/6.observer/observer");
+var memento_1 = require("./2.behavior/7.memento/memento");
 console.log('========== 开始组合模式 ==========');
 composite_1.compositeInit();
 console.log('========== 组合模式结束 ==========');
@@ -51,4 +52,7 @@ console.log('========== 中介者模式结束 ==========');
 console.log('========== 开始观察者模式 ==========');
 observer_1.observerInit();
 console.log('========== 观察者模式结束 ==========');
+console.log('========== 开始备忘录模式 ==========');
+memento_1.mementoInit();
+console.log('========== 备忘录模式结束 ==========');
 //# sourceMappingURL=server.js.map

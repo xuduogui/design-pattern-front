@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-11 00:51:18
+ * @LastEditTime: 2021-07-11 01:14:10
  * @Description: TODO
  */
 
@@ -17,6 +17,7 @@ import { strategyInit } from "./2.behavior/3.strategy/strategy";
 import { iteratorInit } from "./2.behavior/4.iterator/iterator";
 import { mediatorInit } from "./2.behavior/5.mediator/mediator";
 import { observerInit } from "./2.behavior/6.observer/observer";
+import { mementoInit } from "./2.behavior/7.memento/memento";
 
 console.log('========== 开始组合模式 ==========')
 compositeInit()
@@ -61,3 +62,7 @@ console.log('========== 中介者模式结束 ==========')
 console.log('========== 开始观察者模式 ==========')
 observerInit()
 console.log('========== 观察者模式结束 ==========')
+
+console.log('========== 开始备忘录模式 ==========')
+mementoInit()
+console.log('========== 备忘录模式结束 ==========')
