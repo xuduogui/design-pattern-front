@@ -3,7 +3,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-10 21:31:45
+ * @LastEditTime: 2021-07-10 22:09:12
  * @Description: TODO
  */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -15,6 +15,7 @@ var template_1 = require("./2.behavior/0.template/template");
 var command_1 = require("./2.behavior/1.command/command");
 var chainOfResponsibility_1 = require("./2.behavior/2.chainOfResponsibility/chainOfResponsibility");
 var strategy_1 = require("./2.behavior/3.strategy/strategy");
+var iterator_1 = require("./2.behavior/4.iterator/iterator");
 console.log('========== 开始组合模式 ==========');
 composite_1.compositeInit();
 console.log('========== 组合模式结束 ==========');
@@ -39,4 +40,7 @@ console.log('========== 责任链模式结束 ==========');
 console.log('========== 开始策略模式 ==========');
 strategy_1.strategyInit();
 console.log('========== 策略模式结束 ==========');
+console.log('========== 开始迭代器模式 ==========');
+iterator_1.iteratorInit();
+console.log('========== 迭代器模式结束 ==========');
 //# sourceMappingURL=server.js.map
