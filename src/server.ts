@@ -2,7 +2,7 @@
  * @Author: xuziyong
  * @Date: 2021-07-05 23:12:46
  * @LastEditors: xuziyong
- * @LastEditTime: 2021-07-11 01:14:10
+ * @LastEditTime: 2021-07-11 17:29:15
  * @Description: TODO
  */
 
@@ -18,6 +18,7 @@ import { iteratorInit } from "./2.behavior/4.iterator/iterator";
 import { mediatorInit } from "./2.behavior/5.mediator/mediator";
 import { observerInit } from "./2.behavior/6.observer/observer";
 import { mementoInit } from "./2.behavior/7.memento/memento";
+import { visitorInit } from "./2.behavior/8.visitor/visitor";
 
 console.log('========== 开始组合模式 ==========')
 compositeInit()
@@ -66,3 +67,7 @@ console.log('========== 观察者模式结束 ==========')
 console.log('========== 开始备忘录模式 ==========')
 mementoInit()
 console.log('========== 备忘录模式结束 ==========')
+
+console.log('========== 开始访问者模式 ==========')
+visitorInit()
+console.log('========== 访问者模式结束 ==========')
